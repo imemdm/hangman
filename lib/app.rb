@@ -1,8 +1,8 @@
 require "./lib/Game.rb"
+require "./lib/Word.rb"
 
-print "What is your name? "
-name = gets.chomp
 puts "Game is starting..."
 
-g = Game.new(name)
-p g
+g = Game.new("5desk.txt")
+g.start
+
