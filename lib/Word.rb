@@ -24,6 +24,13 @@ class Word
     @pattern
   end
 
+  def to_json
+    JSON.dump({
+      word: @word,
+      pattern: @pattern
+    })
+  end
+
   private
 
   def handle_letter_input(letter)
@@ -31,6 +38,8 @@ class Word
       output_wrong_guess(letter)
       return
     end
+
+    output_correct_guess(letter)
 
     poss = find_occurrences(letter)
 
@@ -63,5 +72,9 @@ class Word
 
   def output_wrong_guess(let)
     puts "No #{let} in the word"
+  end
+
+  def output_correct_guess(let)
+    puts "There is #{let} in the word"
   end
 end

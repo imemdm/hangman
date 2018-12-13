@@ -11,6 +11,14 @@ class Game
     handle_rounds(7)
   end
 
+  def to_json
+    JSON.dump({
+      word: @word.to_json,
+      past_letters: @past_letters,
+      tries_left: @tries_left
+    })
+  end
+
   private
   def handle_rounds(rds)
     result = false
@@ -18,12 +26,10 @@ class Game
       result = round
       rounds_left(rds, r)
       break if result
+      quit_game if save_game
     end
-    if result
-      show_winning_message
-    else
-      show_lost_message
-    end
+
+    result ? show_winning_message : show_lost_message
   end
 
   def round
@@ -44,6 +50,20 @@ class Game
     print "Make a guess: "
   end
 
+  def save_game
+    print "Do you want to save the game?(y/n) "
+    game_save = gets.chomp.downcase
+
+    Save.new.create_save(self.to_json) if game_save == "y"
+  end
+
+  def quit_game
+    print "Do you want to quit the game?(y/n) "
+    quit = gets.chomp.downcase
+    at_exit { puts "Thanks for playing!" }
+    exit if quit == "y"
+  end
+
   def show_current_state
     puts "\n\n"
     puts "Word: #{@word.output_pattern} Length: #{@word.word.length}"
@@ -53,7 +73,9 @@ class Game
   end
 
   def rounds_left(total, current)
-    puts "Tries left: #{total - (current + 1)}"
+    left = total - (current + 1)
+    @tries_left = left
+    puts "Tries left: #{left}"
   end
 
   # Valid input is either a single letter or a
