@@ -20,13 +20,13 @@ class Game
   end
 
   private
-  def handle_rounds(rds)
+  def handle_rounds(count)
     result = false
-    rds.times do |r|
+    count.times do |r|
       result = round
-      rounds_left(rds, r)
+      rounds_left(count, r)
       break if result
-      quit_game if save_game
+      save_game
     end
 
     result ? show_winning_message : show_lost_message
@@ -54,7 +54,10 @@ class Game
     print "Do you want to save the game?(y/n) "
     game_save = gets.chomp.downcase
 
-    Save.new.create_save(self.to_json) if game_save == "y"
+    if game_save == "y"
+      Save.new.create_save(self.to_json)
+      quit_game
+    end
   end
 
   def quit_game
