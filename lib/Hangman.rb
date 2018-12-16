@@ -6,6 +6,7 @@ class Hangman
   # Start the game by initiating a new Game object,
   # passing along a randomly generated word
   def start
+    Save.load
     game = Game.new(Word.new(random_word), 7, [])
     game.run
   end

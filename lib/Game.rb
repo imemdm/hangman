@@ -31,7 +31,7 @@ class Game
     JSON.dump({
       word: @word.to_json,
       past_letters: @past_letters,
-      tries_left: @remaining_turns
+      remaining_turns: @remaining_turns
     })
   end
 
