@@ -1,9 +1,9 @@
 class Word
   attr_reader :word
 
-  def initialize(word)
+  def initialize(word, pattern = nil)
     @word = word.downcase
-    @pattern = "_" * word.length
+    @pattern = pattern || "_" * word.length
   end
 
   # Checks if the suggested letter occures in the word
@@ -33,6 +33,12 @@ class Word
       word: @word,
       pattern: @pattern
     })
+  end
+
+  def self.from_json(string)
+    data = JSON.load(string)
+
+    self.new(data["word"], data["pattern"])
   end
 
   private

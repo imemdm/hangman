@@ -1,8 +1,8 @@
 class Game
-  def initialize(word, remaining_turns, past_letters)
+  def initialize(word, past_letters, remaining_turns)
     @word = word
-    @remaining_turns = remaining_turns
     @past_letters = past_letters
+    @remaining_turns = remaining_turns
   end
 
   # Everything put toghether to play a single game
@@ -33,6 +33,12 @@ class Game
       past_letters: @past_letters,
       remaining_turns: @remaining_turns
     })
+  end
+
+  def self.from_json(string)
+    data = JSON.load(string)
+    p data
+    self.new(Word.from_json(data["word"]), data['past_letters'], data['remaining_turns'])
   end
 
   private
