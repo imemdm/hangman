@@ -1,116 +1,64 @@
 class Game
-  @@alphabet = ("a".."z").to_a
-
-  def initialize(file_name)
-    @file_name = file_name
-    @word = Word.new(random_word)
-    @past_letters = []
+  def initialize(word, remaining_turns, past_letters)
+    @word = word
+    @remaining_turns = remaining_turns
+    @past_letters = past_letters
   end
 
-  def start
-    handle_rounds(7)
+  # Everything put toghether to play a single game
+  def run
+    @remaining_turns.times do |turn|
+      puts "#{@remaining_turns = @remaining_turns - turn} turns remaining"
+      guessed = Turn.new(@word, @past_letters).complete
+      Helpers.whitespace(1)
+
+      if guessed
+        Helpers.whitespace(1)
+        at_exit { puts "You have guessed: '#{@word.word}'" }
+        exit
+      end
+
+      show_current_state
+      Helpers.whitespace(2)
+      save
+      Helpers.whitespace(2)
+    end
+    at_exit { puts "The word was '#{@word.word}' - YOU LOST" }
+    exit
   end
 
   def to_json
     JSON.dump({
       word: @word.to_json,
       past_letters: @past_letters,
-      tries_left: @tries_left
+      tries_left: @remaining_turns
     })
   end
 
   private
-  def handle_rounds(count)
-    result = false
-    count.times do |r|
-      result = round
-      rounds_left(count, r)
-      break if result
-      save_game
-    end
-
-    result ? show_winning_message : show_lost_message
-  end
-
-  def round
-    show_current_state
-    input = ""
-    loop do
-      ask_for_input
-      input = gets.chomp.downcase
-      break if valid_letter?(input) || valid_word?(input)
-    end
-    
-    @past_letters << input if valid_letter?(input)
-
-    @word.guess(input)
-  end
-
-  def ask_for_input
-    print "Make a guess: "
-  end
-
-  def save_game
+  # Logic to make a save after each turn
+  def save
     print "Do you want to save the game?(y/n) "
-    game_save = gets.chomp.downcase
+    make_save = gets.chomp.downcase
 
-    if game_save == "y"
-      Save.new.create_save(self.to_json)
-      quit_game
+    if make_save == "y"
+      Save.add(self.to_json)
+      quit
     end
   end
 
-  def quit_game
+  # Handles the logic to quit the game after a save
+  def quit
     print "Do you want to quit the game?(y/n) "
     quit = gets.chomp.downcase
     at_exit { puts "Thanks for playing!" }
     exit if quit == "y"
   end
 
+  # Outputs some info after each turn
   def show_current_state
-    puts "\n\n"
-    puts "Word: #{@word.output_pattern} Length: #{@word.word.length}"
+    puts "Word of length #{@word.word.length} : #{@word.output_pattern}"
     print "Previous guesses: "
     @past_letters.each { |letter| print " #{letter}" }
-    puts "\n"
-  end
-
-  def rounds_left(total, current)
-    left = total - (current + 1)
-    @tries_left = left
-    puts "Tries left: #{left}"
-  end
-
-  # Valid input is either a single letter or a
-  # n entire valid word
-  def valid_letter?(input)
-    @@alphabet.include?(input) && !@past_letters.include?(input)
-  end
-
-  # Checks if the given input is a valid word through its length
-  def valid_word?(input)
-    input.length >= 5 && input.length <= 12
-  end
-
-  # Returns an array containing all words from the given dict
-  def load_dict
-    File.readlines(@file_name, chomp: true)
-  end
-
-  # Selects a random valid word from the dict
-  def random_word
-    valid_words = load_dict.find_all do |word| 
-      valid_word?(word)
-    end
-
-    valid_words[rand(valid_words.length)]
-  end
-
-  def show_winning_message
-    puts "You have guessed the word #{@word.word}"
-  end
-
-  def show_lost_message
-    puts "You LOST! The word was #{@word.word}"
   end
 end
