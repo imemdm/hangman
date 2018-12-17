@@ -7,8 +7,9 @@ class Game
 
   # Everything put toghether to play a single game
   def run
-    @remaining_turns.times do |turn|
-      puts "#{@remaining_turns = @remaining_turns - turn} turns remaining"
+    turns = @remaining_turns
+    turns.times do |turn|
+      puts "#{@remaining_turns = turns - turn} turns remaining"
       guessed = Turn.new(@word, @past_letters).complete
       Helpers.whitespace(1)
 
