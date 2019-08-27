@@ -26,18 +26,14 @@ class Game
     turns.times do |turn|
       puts "#{@remaining_turns = turns - turn} turns remaining"
       guessed = Turn.new(@word, @past_letters).complete
-      Helpers.whitespace(1)
 
       if guessed
-        Helpers.whitespace(1)
         at_exit { puts "You have guessed: '#{@word.word}'" }
         exit
       end
 
       show_current_state
-      Helpers.whitespace(2)
       save
-      Helpers.whitespace(2)
     end
     at_exit { puts "The word was '#{@word.word}' - YOU LOST" }
     exit
