@@ -5,7 +5,11 @@ class Hangman
 
   # Start the game by initiating a new Game object,
   # passing along a randomly generated word
-  def start
+  def self.start(dict)
+    puts "Hangman is starting..."
+
+    self.new(dict).menu
+
     if show_saves?
       string = select_save
       p string
@@ -18,6 +22,7 @@ class Hangman
   end
 
   private
+
   # Returns an array containing all words from the given dict
   def load_dict
     File.readlines(@dict, chomp: true)

@@ -7,8 +7,6 @@ require "./lib/Hangman"
 
 DICT = "5desk.txt"
 
-puts "Game is starting..."
-
 Hangman.start(DICT)
 
 
