@@ -1,6 +1,4 @@
-class Helpers
-  @@alphabet = ("a".."z").to_a
-  
+class Helpers  
   # Checks if the given input is a valid word through its length
   def self.valid_word?(input)
     input.length >= 5 && input.length <= 12
@@ -9,7 +7,7 @@ class Helpers
   # Valid input is either a single letter or a
   # n entire valid word
   def self.valid_letter?(input, past_letters)
-    @@alphabet.include?(input) && !past_letters.include?(input)
+    ("a".."z").include?(input) && !past_letters.include?(input)
   end
 
   # Checks if the input is either a valid letter or a word

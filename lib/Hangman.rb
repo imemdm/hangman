@@ -22,14 +22,7 @@ class Hangman
     File.readlines(@dict, chomp: true)
   end
 
-  # Selects a random valid word from the dict
-  def random_word
-    valid_words = load_dict.find_all do |word| 
-      Helpers.valid_word?(word)
-    end
 
-    valid_words[rand(valid_words.length)]
-  end
 
   def show_saves?
     print "Do you want to select a save from your library?(y/n) "
