@@ -18,6 +18,8 @@ class Game
 
   private
 
+  attr_reader :remaining_turns, :word, :past_letters
+
   # Everything put toghether to play a single game
   def run
     turns = @remaining_turns
