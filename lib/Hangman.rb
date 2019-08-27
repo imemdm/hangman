@@ -9,22 +9,20 @@ class Hangman
     puts "Hangman is starting..."
 
     self.new(dict).menu
-
-
   end
 
   private
 
   def menu
-    if show_saves?
-      string = select_save
-      p string
-      game = Game.from_json(string)
-      p game
+    print "Load a saved game?(y/n) "
+    show_saves = gets.chomp.downcase
+
+    if show_saves == "y"
+      save = select_save
+      game = Game.from_json(save).run
     else
-      game = Game.new(Word.new(random_word), [], 7)
+      game = Game.new(Word.new(random_word), [], 7).run
     end
-    game.run
   end
 
   # Returns an array containing all words from the given dict
@@ -48,10 +46,9 @@ class Hangman
   end
 
   def select_save
-    puts "Saves"
+    puts "Select a save from the list by its number: "
     saves = Save.load
     saves.each_with_index { |save, i| puts i }
-    Helpers.whitespace(1)
     saves[gets.chomp.to_i]
   end
 end
