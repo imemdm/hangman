@@ -5,8 +5,10 @@ require "./lib/Turn"
 require "./lib/Save"
 require "./lib/Hangman"
 
+DICT = "5desk.txt"
+
 puts "Game is starting..."
 
-hangman = Hangman.new("5desk.txt")
-hangman.start
+Hangman.start(DICT)
+
 
