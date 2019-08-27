@@ -39,6 +39,10 @@ class Game
     exit
   end
 
+  def game_over?
+    guessed? || ended?
+  end
+
   def to_json
     JSON.dump({
       word: @word.to_json,
