@@ -12,7 +12,7 @@ class Game
       save = Save.select_save
       self.from_json(save).run
     else
-      self.new(Word.new(random_word), [], 7).run
+      self.new(Word.new(Dict.random_word), [], 7).run
     end
   end
 
