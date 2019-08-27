@@ -37,10 +37,5 @@ class Hangman
     gets.chomp.downcase == "y" ? true : false
   end
 
-  def select_save
-    puts "Select a save from the list by its number: "
-    saves = Save.load
-    saves.each_with_index { |save, i| puts i }
-    saves[gets.chomp.to_i]
-  end
+
 end

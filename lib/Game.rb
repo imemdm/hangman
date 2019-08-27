@@ -9,7 +9,7 @@ class Game
     print "Load a saved game?(y/n) "
 
     if gets.chomp.downcase == "y"
-      save = select_save
+      save = Save.select_save
       self.from_json(save).run
     else
       self.new(Word.new(random_word), [], 7).run
