@@ -6,5 +6,11 @@ class Dict
   end
 
   def self.load
+    dict = self.new(FILE_NAME)
+    File.readlines(dict, chomp: true)
   end
+
+  private
+
+  attr_reader :dict
 end
