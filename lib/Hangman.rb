@@ -10,6 +10,12 @@ class Hangman
 
     self.new(dict).menu
 
+
+  end
+
+  private
+
+  def menu
     if show_saves?
       string = select_save
       p string
@@ -20,8 +26,6 @@ class Hangman
     end
     game.run
   end
-
-  private
 
   # Returns an array containing all words from the given dict
   def load_dict
