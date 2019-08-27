@@ -14,15 +14,7 @@ class Hangman
   private
 
   def menu
-    print "Load a saved game?(y/n) "
-    show_saves = gets.chomp.downcase
-
-    if show_saves == "y"
-      save = select_save
-      game = Game.from_json(save).run
-    else
-      game = Game.new(Word.new(random_word), [], 7).run
-    end
+    
   end
 
   # Returns an array containing all words from the given dict

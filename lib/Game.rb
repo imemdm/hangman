@@ -5,6 +5,18 @@ class Game
     @remaining_turns = remaining_turns
   end
 
+  def start
+    print "Load a saved game?(y/n) "
+    show_saves = gets.chomp.downcase
+
+    if show_saves == "y"
+      save = select_save
+      game = self.from_json(save).run
+    else
+      game = self.new(Word.new(random_word), [], 7).run
+    end
+  end
+
   # Everything put toghether to play a single game
   def run
     turns = @remaining_turns
