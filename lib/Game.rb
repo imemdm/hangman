@@ -5,17 +5,18 @@ class Game
     @remaining_turns = remaining_turns
   end
 
-  def start
+  def self.start
     print "Load a saved game?(y/n) "
-    show_saves = gets.chomp.downcase
 
-    if show_saves == "y"
+    if gets.chomp.downcase == "y"
       save = select_save
-      game = self.from_json(save).run
+      self.from_json(save).run
     else
-      game = self.new(Word.new(random_word), [], 7).run
+      self.new(Word.new(random_word), [], 7).run
     end
   end
+
+  private
 
   # Everything put toghether to play a single game
   def run
@@ -50,11 +51,9 @@ class Game
 
   def self.from_json(string)
     data = JSON.load(string)
-    p data
     self.new(Word.from_json(data["word"]), data['past_letters'], data['remaining_turns'])
   end
 
-  private
   # Logic to make a save after each turn
   def save
     print "Do you want to save the game?(y/n) "
