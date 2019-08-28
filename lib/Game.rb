@@ -30,9 +30,9 @@ class Game
         exit
       end
       self.guesses -= 1
-      
+
       show_current_state
-      save
+      save_prompt
     end
     at_exit { puts "The word was '#{@word.word}' - YOU LOST" }
     exit
@@ -64,22 +64,20 @@ class Game
   end
 
   # Logic to make a save after each turn
-  def save
-    print "Do you want to save the game?(y/n) "
-    make_save = gets.chomp.downcase
+  def save_prompt
+    print "Save the current progress?(y/n) "
 
-    if make_save == "y"
+    if gets.chomp.downcase == "y"
       Save.add(self.to_json)
-      quit
     end
+    quit_prompt
   end
 
   # Handles the logic to quit the game after a save
-  def quit
-    print "Do you want to quit the game?(y/n) "
-    quit = gets.chomp.downcase
+  def quit_prompt
+    print "Quit?(y/n) "
     at_exit { puts "Thanks for playing!" }
-    exit if quit == "y"
+    exit if gets.chomp.downcase == "y"
   end
 
   # Outputs some info after each turn
