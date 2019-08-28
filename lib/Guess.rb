@@ -1,4 +1,8 @@
 class Guess
+  def initialize(word)
+    @word = word
+  end
+  
   def self.make(word)
     loop do
       print "Your guess: "
