@@ -4,6 +4,7 @@ class Word
   def initialize(word, pattern = nil)
     @word = word.downcase
     @pattern = pattern || "_" * word.length
+    @current_guess = nil
   end
 
   # Checks if the suggested letter occures in the word
