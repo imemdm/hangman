@@ -2,12 +2,12 @@ class Guess
   def initialize(word)
     @word = word
   end
-  
+
   def self.make(word)
     loop do
       print "Your guess: "
 
-      break if guess_success(gets.chomp.downcase)
+      break if guess_success?(gets.chomp.downcase)
     end
   end
 
@@ -30,4 +30,9 @@ class Guess
 
   private
 
+  attr_reader :word
+
+  def guess_success?(guess)
+    word.check(guess)
+  end
 end
