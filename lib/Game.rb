@@ -81,8 +81,7 @@ class Game
 
   # Outputs some info after each turn
   def show_current_state
-    puts "Word of length #{@word.word.length} : #{@word.output_pattern}"
-    print "Previous guesses: "
-    @past_letters.each { |letter| print " #{letter}" }
+    puts "Word of length #{word.length} : #{word.pattern}"
+    puts "Previous guesses: #{word.guesses}"
   end
 end
