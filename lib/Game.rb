@@ -22,7 +22,7 @@ class Game
   # Everything put toghether to play a single game
   def run
     until game_over?
-      Guess.make(word, past_letters)
+      Guess.make(word)
 
       if guessed?
         at_exit { puts "You have guessed: '#{@word.word}'" }
