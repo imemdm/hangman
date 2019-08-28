@@ -24,7 +24,7 @@ class Game
   def run
     until game_over?
       puts "#{@guesses = turns - turn} turns remaining"
-      guessed = Turn.new(@word, @past_letters).complete
+      Guess.make(word, past_letters)
 
       if guessed?
         at_exit { puts "You have guessed: '#{@word.word}'" }
