@@ -1,11 +1,11 @@
 class Word
-  attr_accessor :pattern, :current_guess
+  attr_accessor :pattern, :full_guess
   attr_reader :word
 
   def initialize(word, pattern = nil)
     @word = word.downcase
     @pattern = pattern || "_" * word.length
-    @current_guess = nil
+    @full_guess = nil
   end
 
   # Checks if the suggested letter occures in the word
@@ -21,8 +21,8 @@ class Word
     poss.each { |pos| @pattern[pos] = letter }
   end
 
-  def guessed?(input)
-    @pattern == @word || input == @word
+  def guessed?
+    pattern == word || full_guess == word
   end
 
   def to_json
