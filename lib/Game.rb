@@ -1,8 +1,8 @@
 class Game
-  def initialize(word, past_letters, remaining_turns)
+  def initialize(word, past_letters, guesses)
     @word = word
     @past_letters = past_letters
-    @remaining_turns = remaining_turns
+    @guesses = guesses
   end
 
   def self.start
@@ -18,12 +18,12 @@ class Game
 
   private
 
-  attr_reader :remaining_turns, :word, :past_letters
+  attr_reader :guesses, :word, :past_letters
 
   # Everything put toghether to play a single game
   def run
     until game_over?
-      puts "#{@remaining_turns = turns - turn} turns remaining"
+      puts "#{@guesses = turns - turn} turns remaining"
       guessed = Turn.new(@word, @past_letters).complete
 
       if guessed?
@@ -43,23 +43,24 @@ class Game
   end
 
   def guessed?
+    word.guessed?
   end
 
   def ended?
-    remaining_turns == 0
+    guesses == 0
   end
 
   def to_json
     JSON.dump({
       word: @word.to_json,
       past_letters: @past_letters,
-      remaining_turns: @remaining_turns
+      guesses: @guesses
     })
   end
 
   def self.from_json(string)
     data = JSON.load(string)
-    self.new(Word.from_json(data["word"]), data['past_letters'], data['remaining_turns'])
+    self.new(Word.from_json(data["word"]), data['past_letters'], data['guesses'])
   end
 
   # Logic to make a save after each turn
