@@ -23,14 +23,14 @@ class Game
   # Everything put toghether to play a single game
   def run
     until game_over?
-      puts "#{@guesses = turns - turn} turns remaining"
       Guess.make(word, past_letters)
 
       if guessed?
         at_exit { puts "You have guessed: '#{@word.word}'" }
         exit
       end
-
+      self.guesses -= 1
+      
       show_current_state
       save
     end
