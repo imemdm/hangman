@@ -12,6 +12,7 @@ class Word
     if valid?(guess)
       apply(guess) if valid_letter?(guess)
       self.full_guess = guess if valid_word?(guess)
+      true
     end
   end
 
