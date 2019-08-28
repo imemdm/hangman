@@ -4,8 +4,10 @@ class Guess
     @past_letters = past_letters
   end
 
-  # Gets valid user input, and then acts accordingly
-  # whether it's a word or a letter
+  def self.make(word, letters)
+    self.new(word, letters)
+  end
+
   def complete
     input = nil
     loop do 
