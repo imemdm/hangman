@@ -20,6 +20,10 @@ class Word
     pattern == word || full_guess == word
   end
 
+  def past_guesses
+    pattern.chars.select { |ch| /[a-z]/ =~ ch }.uniq.join(" ")
+  end
+
   def to_json
     JSON.dump({
       word: word,
