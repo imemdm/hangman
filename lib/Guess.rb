@@ -1,6 +1,10 @@
 class Guess
   def self.make(word)
-    
+    loop do
+      print "Your guess: "
+
+      break if guess_success(gets.chomp.downcase)
+    end
   end
 
   def complete
@@ -21,14 +25,5 @@ class Guess
   end
 
   private
-  # Gets input from player
-  def ask_for_input
-    print "Make a guess: "
-    gets.chomp.downcase
-  end
 
-  # Outputs the correct guess
-  def show_correct_guess(letter)
-    puts "You have guessed correctly: \"#{letter}\""
-  end
 end
