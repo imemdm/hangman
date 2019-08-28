@@ -4,6 +4,8 @@ class Guess
   end
 
   def self.make(word)
+    self.new(word)
+    
     loop do
       print "Your guess: "
       break if guess_success?(gets.chomp.downcase)
