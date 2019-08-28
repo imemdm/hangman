@@ -1,4 +1,4 @@
-class Turn
+class Guess
   def initialize(word, past_letters)
     @word = word
     @past_letters = past_letters
