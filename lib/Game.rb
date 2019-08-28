@@ -22,12 +22,11 @@ class Game
 
   # Everything put toghether to play a single game
   def run
-    turns = @remaining_turns
-    turns.times do |turn|
+    until game_over?
       puts "#{@remaining_turns = turns - turn} turns remaining"
       guessed = Turn.new(@word, @past_letters).complete
 
-      if guessed
+      if guessed?
         at_exit { puts "You have guessed: '#{@word.word}'" }
         exit
       end
@@ -41,6 +40,13 @@ class Game
 
   def game_over?
     guessed? || ended?
+  end
+
+  def guessed?
+  end
+
+  def ended?
+    remaining_turns == 0
   end
 
   def to_json
