@@ -8,17 +8,11 @@ class Word
     @full_guess = nil
   end
 
-  # Checks if the suggested letter occures in the word
-  def has_letter?(letter)
-    @word.match?(letter)
-  end
-
-  # Finds and replaces empty chars in the pattern
-  # with the correct letter
-  def correct_letter(letter)
-    poss = find_occurrences(letter)
-
-    poss.each { |pos| @pattern[pos] = letter }
+  def try(guess)
+    if valid?(guess)
+      apply(guess) if valid_letter?(guess)
+      self.full_guess = guess if valid_word?(guess)
+    end
   end
 
   def guessed?
@@ -27,8 +21,8 @@ class Word
 
   def to_json
     JSON.dump({
-      word: @word,
-      pattern: @pattern
+      word: word,
+      pattern: pattern
     })
   end
 
@@ -39,11 +33,28 @@ class Word
   end
 
   private
+
+  def apply(guess)
+    occurrences(letter).each { |pos| self.pattern[pos] = letter }
+  end
+
+  def valid?(guess)
+    valid_letter?(guess) || valid_word?(guess)
+  end
+
+  def valid_letter?(guess)
+    ("a".."z").include?(guess) && !pattern.include?(guess)
+  end
+
+  def valid_word?(guess)
+    pattern.length == guess.length
+  end
+
   # Returns an array of positional indexes at which
   # the given letter occurrs
-  def find_occurrences(letter)
+  def occurrences(letter)
     positions = []
-    @word.split("").each_with_index do |el, idx|
+    word.chars.each_with_index do |el, idx|
       positions << idx if letter == el
     end
 

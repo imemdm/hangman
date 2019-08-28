@@ -33,6 +33,6 @@ class Guess
   attr_reader :word
 
   def guess_success?(guess)
-    word.check(guess)
+    word.try(guess)
   end
 end
