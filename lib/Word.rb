@@ -1,4 +1,5 @@
 class Word
+  attr_accessor :pattern, :current_guess
   attr_reader :word
 
   def initialize(word, pattern = nil)
@@ -10,11 +11,6 @@ class Word
   # Checks if the suggested letter occures in the word
   def has_letter?(letter)
     @word.match?(letter)
-  end
-
-  # Outputs the current state of the pattern in the console
-  def output_pattern
-    @pattern
   end
 
   # Finds and replaces empty chars in the pattern
