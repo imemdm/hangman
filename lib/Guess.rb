@@ -1,11 +1,10 @@
 class Guess
-  def initialize(word, past_letters)
+  def initialize(word)
     @word = word
-    @past_letters = past_letters
   end
 
-  def self.make(word, letters)
-    self.new(word, letters)
+  def self.make(word)
+    self.new(word)
   end
 
   def complete
