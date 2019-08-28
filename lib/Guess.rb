@@ -1,10 +1,6 @@
 class Guess
-  def initialize(word)
-    @word = word
-  end
-
   def self.make(word)
-    self.new(word)
+    
   end
 
   def complete
