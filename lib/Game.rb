@@ -1,7 +1,6 @@
 class Game
-  def initialize(word, past_letters, guesses)
+  def initialize(word, guesses)
     @word = word
-    @past_letters = past_letters
     @guesses = guesses
   end
 
@@ -18,7 +17,7 @@ class Game
 
   private
 
-  attr_reader :guesses, :word, :past_letters
+  attr_reader :guesses, :word
 
   # Everything put toghether to play a single game
   def run
