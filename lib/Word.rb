@@ -2,9 +2,10 @@ class Word
   attr_accessor :pattern, :full_guess
   attr_reader :word
 
-  def initialize(word, pattern = nil)
+  def initialize(word, pattern = nil, past_guesses = nil)
     @word = word.downcase
     @pattern = pattern || "_" * word.length
+    @past_guesses = past_guesses || []
     @full_guess = nil
   end
 
@@ -12,6 +13,7 @@ class Word
     if valid?(guess)
       apply(guess) if valid_letter?(guess)
       self.full_guess = guess if valid_word?(guess)
+      past_guesses << guess
       true
     end
   end
@@ -20,29 +22,29 @@ class Word
     pattern == word || full_guess == word
   end
 
-  def past_guesses
-    pattern.chars.select { |ch| /[a-z]/ =~ ch }.uniq.join(" ")
-  end
-
   def to_s
-    word
+    "#{word}"
   end
 
   def length
     word.length
   end
 
+  def past_guesses
+    @past_guesses.join(" ")
+  end
   def to_json
     JSON.dump({
       word: word,
-      pattern: pattern
+      pattern: pattern,
+      past_guesses: past_guesses
     })
   end
 
   def self.from_json(string)
     data = JSON.load(string)
 
-    self.new(data["word"], data["pattern"])
+    self.new(data["word"], data["pattern"], data["past_guesses"])
   end
 
   private
