@@ -18,7 +18,7 @@ class Game
 
   # Everything put toghether to play a single game
   def run
-    puts "#{guesses} guesses left. Past guesses: #{word.past_guesses.join(" ")}"
+    puts "Guesses left: #{guesses}. Past guesses: #{word.past_guesses.join(" ")}"
     until game_over?
       Guess.make(word)
 
