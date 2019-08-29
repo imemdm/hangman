@@ -7,14 +7,13 @@ class Game
   end
 
   def self.start
-    print "Load a saved game?(y/n) " if Save.has_saves?
-
-    if gets.chomp.downcase == "y"
-      save = Save.select_save
-      self.from_json(save).run
-    else
-      self.new(Word.new(Dict.random_word), 7).run
+    puts "Game is starting..."
+    if Save.has_saves?
+      print "Load a saved game?(y/n) "
+      self.from_json(Save.select_save).run if gets.chomp.downcase == "y"
     end
+    puts "Random word selected."
+    self.new(Word.new(Dict.random_word), 7).run
   end
 
   # Everything put toghether to play a single game
@@ -29,7 +28,7 @@ class Game
       self.guesses -= 1
 
       show_current_state
-      quit_prompt
+      save_prompt
     end
     at_exit { puts "The word was '#{word}' - YOU LOST" }
     exit
@@ -68,14 +67,14 @@ class Game
     print "Save the current progress?(y/n) "
 
     if gets.chomp.downcase == "y"
-      Save.add(self.to_json)
+      Save.add(Game.to_json)
+      quit_prompt
     end
   end
 
   # Handles the logic to quit the game after a save
   def quit_prompt
     print "Quit?(y/n) "
-    save_prompt
     at_exit { puts "Thanks for playing!" }
     exit if gets.chomp.downcase == "y"
   end
