@@ -24,6 +24,10 @@ class Word
     pattern.chars.select { |ch| /[a-z]/ =~ ch }.uniq.join(" ")
   end
 
+  def to_s
+    word
+  end
+
   def to_json
     JSON.dump({
       word: word,
