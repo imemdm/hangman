@@ -25,7 +25,7 @@ class Game
       Guess.make(word)
 
       if guessed?
-        at_exit { puts "You have guessed: '#{@word.word}'" }
+        at_exit { puts "You have guessed: '#{word}'" }
         exit
       end
       self.guesses -= 1
@@ -33,7 +33,7 @@ class Game
       show_current_state
       save_prompt
     end
-    at_exit { puts "The word was '#{@word.word}' - YOU LOST" }
+    at_exit { puts "The word was '#{word}' - YOU LOST" }
     exit
   end
 
