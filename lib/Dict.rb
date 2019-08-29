@@ -11,7 +11,7 @@ class Dict
   end
 
   def self.has_saves?
-    File.exists?(FILE_NAME)
+    File.exist?(FILE_NAME)
   end
 
   private
