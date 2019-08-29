@@ -10,6 +10,10 @@ class Dict
     valid_words[rand(valid_words.length)]
   end
 
+  def self.has_saves?
+    File.exists?(FILE_NAME)
+  end
+
   private
 
   attr_reader :dict

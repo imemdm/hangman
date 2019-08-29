@@ -29,7 +29,7 @@ class Game
       self.guesses -= 1
 
       show_current_state
-      save_prompt
+      quit_prompt
     end
     at_exit { puts "The word was '#{word}' - YOU LOST" }
     exit
@@ -69,13 +69,13 @@ class Game
 
     if gets.chomp.downcase == "y"
       Save.add(self.to_json)
-      quit_prompt
     end
   end
 
   # Handles the logic to quit the game after a save
   def quit_prompt
     print "Quit?(y/n) "
+    save_prompt
     at_exit { puts "Thanks for playing!" }
     exit if gets.chomp.downcase == "y"
   end
