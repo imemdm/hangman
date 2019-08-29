@@ -1,6 +1,5 @@
 class Word
   attr_accessor :pattern, :full_guess
-  attr_reader :word
 
   def initialize(word, pattern = nil)
     @word = word.downcase
@@ -24,8 +23,8 @@ class Word
     pattern.chars.select { |ch| /[a-z]/ =~ ch }.uniq.join(" ")
   end
 
-  def to_s
-    word
+  def word
+    @word.word
   end
 
   def to_json
