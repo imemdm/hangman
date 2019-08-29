@@ -11,7 +11,7 @@ class Game
       save = Save.select_save
       self.from_json(save).run
     else
-      self.new(Word.new(Dict.random_word), [], 7).run
+      self.new(Word.new(Dict.random_word), 7).run
     end
   end
 
@@ -52,14 +52,13 @@ class Game
   def to_json
     JSON.dump({
       word: @word.to_json,
-      past_letters: @past_letters,
       guesses: @guesses
     })
   end
 
   def self.from_json(string)
     data = JSON.load(string)
-    self.new(Word.from_json(data["word"]), data['past_letters'], data['guesses'])
+    self.new(Word.from_json(data["word"]), data['guesses'])
   end
 
   # Logic to make a save after each turn
