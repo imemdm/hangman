@@ -1,6 +1,6 @@
 class Word
   attr_accessor :pattern, :full_guess
-  attr_reader :word
+  attr_reader :word :past_guesses
 
   def initialize(word, pattern = nil, past_guesses = nil)
     @word = word.downcase
@@ -30,9 +30,6 @@ class Word
     word.length
   end
 
-  def past_guesses
-    @past_guesses.join(" ")
-  end
   def to_json
     JSON.dump({
       word: word,

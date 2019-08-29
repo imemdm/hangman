@@ -1,6 +1,6 @@
 class Game
   attr_accessor :guesses
-  
+
   def initialize(word, guesses)
     @word = word
     @guesses = guesses
@@ -83,6 +83,6 @@ class Game
   # Outputs some info after each turn
   def show_current_state
     puts "Word of length #{word.length} : #{word.pattern}"
-    puts "Previous guesses: #{word.past_guesses}"
+    puts "Previous guesses: #{word.past_guesses.join(" ")}"
   end
 end
