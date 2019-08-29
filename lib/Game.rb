@@ -69,8 +69,8 @@ class Game
 
     if gets.chomp.downcase == "y"
       Save.add(self.to_json)
+      quit_prompt
     end
-    quit_prompt
   end
 
   # Handles the logic to quit the game after a save
