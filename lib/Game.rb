@@ -53,8 +53,8 @@ class Game
 
   def to_json
     JSON.dump({
-      word: @word.to_json,
-      guesses: @guesses
+      word: word.to_json,
+      guesses: guesses
     })
   end
 
