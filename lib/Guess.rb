@@ -1,14 +1,21 @@
 class Guess
+  def initialize(word)
+    @word = word
+  end
+  
   def self.make(word)
+    guess = self.new(word)
     loop do
       print "Your guess: "
-      break if self.guess_success?(gets.chomp.downcase)
+      break if guess.success?(gets.chomp.downcase)
     end
+  end
+
+  def success?(player_input)
+    word.try(player_input)
   end
 
   private
 
-  def self.guess_success?(guess)
-    word.try(guess)
-  end
+  attr_reader :word
 end
