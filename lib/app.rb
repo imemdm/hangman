@@ -5,6 +5,6 @@ require "./lib/Turn"
 require "./lib/Save"
 require "./lib/Hangman"
 
-Hangman.start
+Game.start
 
 
