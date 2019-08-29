@@ -1,4 +1,6 @@
 class Game
+  attr_accessor :guesses
+  
   def initialize(word, guesses)
     @word = word
     @guesses = guesses
@@ -35,7 +37,7 @@ class Game
 
   private
 
-  attr_reader :guesses, :word
+  attr_reader :word
 
   def game_over?
     guessed? || ended?
