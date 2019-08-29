@@ -18,6 +18,7 @@ class Game
 
   # Everything put toghether to play a single game
   def run
+    puts "Word: #{word.pattern}"
     puts "Guesses left: #{guesses}. Past guesses: #{word.past_guesses.join(" ")}"
     until game_over?
       Guess.make(word)
@@ -27,7 +28,7 @@ class Game
         exit
       end
       self.guesses -= 1
-      puts "#{guesses} left"
+      puts "Guesses left: #{guesses}"
 
       show_current_state
       save_prompt
@@ -66,7 +67,7 @@ class Game
 
   # Logic to make a save after each turn
   def save_prompt
-    print "Save the current progress?(y/n) "
+    print "Make a save?(y/n) "
 
     if gets.chomp.downcase == "y"
       Save.add(to_json)
