@@ -10,6 +10,9 @@ class Save
     saves[gets.chomp.to_i]
   end
 
+  def self.has_saves?
+    File.exist?(FILE_NAME)
+  end
   
   def self.add(content)
     File.open(FILE_NAME, "a") { |fd| fd.puts(content) }

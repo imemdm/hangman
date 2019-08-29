@@ -7,7 +7,7 @@ class Game
   end
 
   def self.start
-    print "Load a saved game?(y/n) " if Dict.has_saves?
+    print "Load a saved game?(y/n) " if Save.has_saves?
 
     if gets.chomp.downcase == "y"
       save = Save.select_save
