@@ -43,7 +43,7 @@ class Word
 
   private
 
-  def apply(guess)
+  def apply(letter)
     occurrences(letter).each { |pos| self.pattern[pos] = letter }
   end
 
