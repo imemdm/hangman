@@ -29,7 +29,7 @@ class Word
   end
 
   def length
-    word.word.length
+    word.length
   end
 
   def to_json
