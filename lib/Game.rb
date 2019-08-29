@@ -26,6 +26,7 @@ class Game
         exit
       end
       self.guesses -= 1
+      puts "#{guesses} left"
 
       show_current_state
       save_prompt
