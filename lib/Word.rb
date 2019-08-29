@@ -40,7 +40,6 @@ class Word
 
   def self.from_json(string)
     data = JSON.load(string)
-
     self.new(data["word"], data["pattern"], data["past_guesses"])
   end
 

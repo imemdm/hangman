@@ -67,7 +67,7 @@ class Game
     print "Save the current progress?(y/n) "
 
     if gets.chomp.downcase == "y"
-      Save.add(Game.to_json)
+      Save.add(to_json)
       quit_prompt
     end
   end
