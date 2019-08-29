@@ -15,10 +15,6 @@ class Game
     end
   end
 
-  private
-
-  attr_reader :guesses, :word
-
   # Everything put toghether to play a single game
   def run
     until game_over?
@@ -36,6 +32,10 @@ class Game
     at_exit { puts "The word was '#{word}' - YOU LOST" }
     exit
   end
+
+  private
+
+  attr_reader :guesses, :word
 
   def game_over?
     guessed? || ended?
