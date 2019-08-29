@@ -1,6 +1,6 @@
 class Word
   attr_accessor :pattern, :full_guess
-  attr_reader :word :past_guesses
+  attr_reader :word, :past_guesses
 
   def initialize(word, pattern = nil, past_guesses = nil)
     @word = word.downcase
