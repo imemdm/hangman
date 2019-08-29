@@ -28,6 +28,10 @@ class Word
     word
   end
 
+  def length
+    word.word.length
+  end
+
   def to_json
     JSON.dump({
       word: word,
